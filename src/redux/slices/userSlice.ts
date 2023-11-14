@@ -17,14 +17,14 @@ export const fetchUser = createAsyncThunk("UserList/fetchUser", async () =>{
     }
   })
 
-  const data = localStorage.getItem("loginData") !== null ? JSON.parse(String(localStorage.getItem('loginData'))) : []
+  // const data = localStorage.getItem("loginData") !== null ? JSON.parse(String(localStorage.getItem('loginData'))) : []
 
   const initialState: initialStateUser = {
     users: [],
     error: null,
     isLoading: false, 
-    isLoggedIn: data.isLoggedIn,
-    userData: data.userData
+    isLoggedIn: false,
+    userData: null
   }
 
 export const userSlice = createSlice({
@@ -34,24 +34,24 @@ export const userSlice = createSlice({
     login : (state, action)=>{
       state.isLoggedIn= true;
       state.userData = action.payload
-      localStorage.setItem(
-        'loginData',
-        JSON.stringify({
-          isLoggedIn: state.isLoggedIn,
-          userData: state.userData
-        })
-      )
+      // localStorage.setItem(
+      //   'loginData',
+      //   JSON.stringify({
+      //     isLoggedIn: state.isLoggedIn,
+      //     userData: state.userData
+      //   })
+      // )
     },
     logout : (state)=>{
       state.isLoggedIn= false
       state.userData = null
-      localStorage.setItem(
-        'loginData',
-        JSON.stringify({
-          isLoggedIn: state.isLoggedIn,
-          userData: state.userData
-        })
-      )
+      // localStorage.setItem(
+      //   'loginData',
+      //   JSON.stringify({
+      //     isLoggedIn: state.isLoggedIn,
+      //     userData: state.userData
+      //   })
+      // )
     },
     updateUser : (state, action)=>{
       const {id, firstName, lastName}= action.payload
@@ -60,13 +60,13 @@ export const userSlice = createSlice({
         foundUser.firstName = firstName
         foundUser.lastName = lastName
         state.userData = foundUser
-        localStorage.setItem(
-          'loginData',
-          JSON.stringify({
-            isLoggedIn: state.isLoggedIn,
-            userData: state.userData
-          })
-        )
+        // localStorage.setItem(
+        //   'loginData',
+        //   JSON.stringify({
+        //     isLoggedIn: state.isLoggedIn,
+        //     userData: state.userData
+        //   })
+        // )
       }
     },
     usersRequest: (state) => {
