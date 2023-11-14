@@ -112,6 +112,7 @@ span{
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding: 20px;
 }
 
 /* .sidebar-container{
@@ -231,19 +232,30 @@ span{
   height: 10vh;
   width: 100%;
 }
-/* .cart{
-  display: flex;
-  justify-content: space-between;
-  row-gap: 30px;
-} */
 .cart h1{
+  background-color: #b9b5b5;
+  color: #213547;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 50px;
 }
+.cart-amount{
+  background-color: #b9b5b5;
+  color: #213547;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 30px;
+  padding: 20px;
+}
 .cart p{
   font-size: 30px;
+}
+.pagenation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 @keyframes logo-spin {
   from {

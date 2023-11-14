@@ -70,6 +70,10 @@ export const productSlice = createSlice({
     deleteItemCart: (state, action) => {
       state.cart = action.payload
     },
+    deletetAllCart: (state) => {
+      state.cart = []
+      localStorage.removeItem('cart')
+    },
     productsRequest: (state) => {
       state.isLoading = true
     },
@@ -101,6 +105,6 @@ export const {
   removeProduct, addProduct, productsRequest, 
   productsSuccess, findProductById, searchProduct, 
   addItemCart, deleteItemCart, setPage, 
-  filterProducts, updateProduct, sortProduct 
+  filterProducts, updateProduct, sortProduct, deletetAllCart 
 } = productSlice.actions
 export default productSlice.reducer

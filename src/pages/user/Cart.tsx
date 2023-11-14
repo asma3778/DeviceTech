@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardMedia, CardContent, Typography, CardActions, Button } from "@mui/material";
 
 import { AppDispatch, RootState } from '../../redux/store'
-import { deleteItemCart } from '../../redux/slices/productSlice'
+import { deleteItemCart, deletetAllCart } from '../../redux/slices/productSlice'
 
 export const Cart = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -19,16 +19,32 @@ export const Cart = () => {
     }
   }
 
+  const handelRemoveAllCart = () => {
+    dispatch(deletetAllCart())
+  }
+
+  const cartTotal = () => {
+    let totalAmount = 0
+    cart.length > 0 &&
+      cart.map((cartItem) => (totalAmount = totalAmount + cartItem.price))
+    return totalAmount
+  }
+
   return (
     <div className='cart'>
       <h1>cart</h1>
+      <div className='cart-amount'>
+      <label className="product p-3">Total: {cartTotal()}</label>
+      <Button  onClick={() => { handelRemoveAllCart() }}>Delete All Cart items</Button>
+      </div>
       <div>
-        {cart.length > 0 ? (
+        {cart.length > 0 && (
             <div className="product-in-cart">
+              
               {cart.map(({ id, image, name, description, variants, price }) => (
-                <Card sx={{ maxWidth: 350 }}>
+                <Card sx={{ maxWidth: 250 }}>
                     <CardMedia
-              sx={{ height: 300 }}
+              sx={{ height: 200 }}
               image={image}
               title={name}
             />
@@ -53,9 +69,8 @@ export const Cart = () => {
                 </Card>
                 ))}
             </div>
-        ) : (
-          <p>nothing in cart</p>
-        )}
+        ) }
+        
       </div>
     </div>
   )
