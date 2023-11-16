@@ -42,7 +42,22 @@ export const orderSlice = createSlice({
       const filteredItems = state.orders.filter((order) => order.id !== action.payload.orderId)
       state.orders = filteredItems
     }
-  }
+  },
+  // extraReducers: (builder)=>{
+  //   builder
+  //   .addCase(fetchOrder.pending, (state) =>{
+  //     state.isLoading = true
+  //     state.error = null
+  //   })
+  //   .addCase(fetchOrder.fulfilled, (state, action: any) =>{
+  //     state.isLoading = false
+  //     state.orders = action.payload
+  //   })
+  //   .addCase(fetchOrder.rejected, (state,action) =>{
+  //     state.isLoading = false
+  //     state.error = action.error.message || "Error"
+  //   })
+  // }
 })
 
 export const { removeOrder, addOrder, ordersRequest, ordersSuccess } = orderSlice.actions

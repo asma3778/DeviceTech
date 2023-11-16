@@ -99,7 +99,22 @@ export const productSlice = createSlice({
       const filteredItems = state.products.filter((product) => product.id !== action.payload.productId)
       state.products = filteredItems
     }
-  }
+  },
+  // extraReducers: (builder)=>{
+  //   builder
+  //   .addCase(fetchProducts.pending, (state) =>{
+  //     state.isLoading = true
+  //     state.error = null
+  //   })
+  //   .addCase(fetchProducts.fulfilled, (state, action: any) =>{
+  //     state.isLoading = false
+  //     state.products = action.payload
+  //   })
+  //   .addCase(fetchProducts.rejected, (state,action) =>{
+  //     state.isLoading = false
+  //     state.error = action.error.message || "Error"
+  //   })
+  // }
 })
 export const { 
   removeProduct, addProduct, productsRequest, 

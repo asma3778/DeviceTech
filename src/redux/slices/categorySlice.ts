@@ -1,7 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import api from '../../api'
-import { Category, initialStateCategory } from '../../types/types'
+import { Category } from '../../types/types'
+
+export type initialStateCategory = {
+  categories: Category[]
+  error: null | string
+  isLoading: boolean
+  filter: number[] | null
+  categoryData: Category | null
+}
 
 const initialState: initialStateCategory = {
   categories: [],
@@ -60,6 +68,21 @@ export const categorySlice = createSlice({
       const filteredCatgories = state.categories.filter((category) => category.id !== action.payload.categoryId)
       state.categories = filteredCatgories
     }
+  }, 
+  extraReducers: (builder)=>{
+    builder
+    .addCase(fetchCategory.pending, (state) =>{
+      state.isLoading = true
+      state.error = null
+    })
+    .addCase(fetchCategory.fulfilled, (state, action) =>{
+      state.isLoading = false
+      state.categories = action.payload
+    })
+    .addCase(fetchCategory.rejected, (state,action) =>{
+      state.isLoading = false
+      state.error = action.error.message || "Error"
+    })
   }
 })
 export const { 

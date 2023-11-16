@@ -27,13 +27,7 @@ export type Category = {
   name: string
   ischecked: boolean
 }
-export type initialStateCategory = {
-  categories: Category[]
-  error: null | string
-  isLoading: boolean
-  filter: number[] | null
-  categoryData: Category | null
-}
+
 
 // For Users
 export type User = {
@@ -45,18 +39,12 @@ export type User = {
     role: string
 }
 
-export type initialStateUser = {
-  users: User[]
-  error: null | string
-  isLoading: boolean
-  isLoggedIn: boolean
-  userData: User | null
-}
+
 
 // For Orders
 
 export type Order ={
-  id: number
+    id: number
     productId: number
     userId: number
     purchasedAt: string

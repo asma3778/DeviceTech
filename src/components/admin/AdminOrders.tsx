@@ -31,7 +31,7 @@ export const AdminOrders = () =>{
       </div>
       <div className="general-content">
           {orders.orders.map((order) => (
-      <div>
+      <div key={order.id}>
           <h2>{order.id}</h2>
           <h4>{order.productId }</h4>
           <h4>{order.userId }</h4>

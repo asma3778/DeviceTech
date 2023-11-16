@@ -1,7 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import api from '../../api'
-import { initialStateUser } from '../../types/types'
+import { User } from '../../types/types'
+
+export type initialStateUser = {
+  users: User[]
+  error: null | string
+  isLoading: boolean
+  isLoggedIn: boolean
+  userData: User | null
+}
+
+const initialState: initialStateUser = {
+  users: [],
+  error: null,
+  isLoading: false, 
+  isLoggedIn: false,
+  userData: null
+}
+console.log(initialState)
 
 export const fetchUser = createAsyncThunk("UserList/fetchUser", async () =>{ 
   try {
@@ -9,49 +26,40 @@ export const fetchUser = createAsyncThunk("UserList/fetchUser", async () =>{
 
       if (!response) {
         throw new Error('Network response error');}
-     
-      const Users = response;
-      return Users;
+      return response;
     } catch (error) {
     console.log(error) 
     }
   })
+  
 
-  // const data = localStorage.getItem("loginData") !== null ? JSON.parse(String(localStorage.getItem('loginData'))) : []
-
-  const initialState: initialStateUser = {
-    users: [],
-    error: null,
-    isLoading: false, 
-    isLoggedIn: false,
-    userData: null
-  }
+  const data = localStorage.getItem("loginData") !== null ? JSON.parse(String(localStorage.getItem('loginData'))) : []
 
 export const userSlice = createSlice({
-  name: 'User',
+  name: 'users',
   initialState: initialState,
   reducers: {
     login : (state, action)=>{
       state.isLoggedIn= true;
       state.userData = action.payload
-      // localStorage.setItem(
-      //   'loginData',
-      //   JSON.stringify({
-      //     isLoggedIn: state.isLoggedIn,
-      //     userData: state.userData
-      //   })
-      // )
+      localStorage.setItem(
+        'loginData',
+        JSON.stringify({
+          isLoggedIn: state.isLoggedIn,
+          userData: state.userData
+        })
+      )
     },
     logout : (state)=>{
       state.isLoggedIn= false
       state.userData = null
-      // localStorage.setItem(
-      //   'loginData',
-      //   JSON.stringify({
-      //     isLoggedIn: state.isLoggedIn,
-      //     userData: state.userData
-      //   })
-      // )
+      localStorage.setItem(
+        'loginData',
+        JSON.stringify({
+          isLoggedIn: state.isLoggedIn,
+          userData: state.userData
+        })
+      )
     },
     updateUser : (state, action)=>{
       const {id, firstName, lastName}= action.payload
@@ -60,13 +68,13 @@ export const userSlice = createSlice({
         foundUser.firstName = firstName
         foundUser.lastName = lastName
         state.userData = foundUser
-        // localStorage.setItem(
-        //   'loginData',
-        //   JSON.stringify({
-        //     isLoggedIn: state.isLoggedIn,
-        //     userData: state.userData
-        //   })
-        // )
+        localStorage.setItem(
+          'loginData',
+          JSON.stringify({
+            isLoggedIn: state.isLoggedIn,
+            userData: state.userData
+          })
+        )
       }
     },
     usersRequest: (state) => {
@@ -83,7 +91,23 @@ export const userSlice = createSlice({
       const filteredItems = state.users.filter((user) => user.id !== action.payload.userId)
       state.users = filteredItems
     }
-  }
+  },
+  // extraReducers: (builder)=>{
+  //   builder
+  //   .addCase(fetchUser.pending, (state) =>{
+  //     state.isLoading = true
+  //     state.error = null
+  //   })
+  //   .addCase(fetchUser.fulfilled, (state, action )=>{
+  //     state.isLoading = false
+  //     state.users = action.payload
+  //   })
+  //   .addCase(fetchUser.rejected, (state,action) =>{
+  //     state.isLoading = false
+  //     state.error = action.error.message || "Error"
+  //   })
+  // }
+  
 })
 
 export const { login,logout, removeUser, addUser, usersRequest, usersSuccess, updateUser } = userSlice.actions

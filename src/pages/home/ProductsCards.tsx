@@ -90,7 +90,7 @@ export const ProductsCards = () => {
         <ul>
           {currentItems.length > 0 &&
           currentItems.map((product) => (
-            <Card sx={{ maxWidth: 300 }}>
+            <Card sx={{ maxWidth: 300 }} key={product.id}>
             <CardMedia
               sx={{ height: 300 }}
               image={product.image}

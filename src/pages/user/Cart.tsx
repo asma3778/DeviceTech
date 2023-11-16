@@ -47,6 +47,7 @@ export const Cart = () => {
               sx={{ height: 200 }}
               image={image}
               title={name}
+              key={name}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">

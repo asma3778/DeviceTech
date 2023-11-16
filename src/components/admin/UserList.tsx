@@ -31,7 +31,7 @@ export const UserList = () =>{
       </div>
       <div className="general-content">
           {users.users.map((user) => (
-      <div>
+      <div key={user.id}>
           <h2>{user.id}</h2>
           <h4>{`${user.firstName }  ${user.lastName }`}</h4>
           <p>{user.email}</p>

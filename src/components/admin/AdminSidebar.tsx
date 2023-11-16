@@ -7,16 +7,16 @@ export const AdminSidebar = () =>{
             <header className='sidebar-header'>Admin Dashboard</header>
                 <ul className='sidebar-container'>
                     <li>
-                       <a> <Link to="/admin/category">Category </Link></a>
+                         <Link to="/admin/category">Category </Link>
                     </li>
                     <li>
-                        <a><Link to="/admin/products">Products </Link></a>
+                         <Link to="/admin/products">Products </Link>
                     </li>
                     <li>
-                        <a><Link to="/admin/users">Users </Link></a>
+                         <Link to="/admin/users">Users </Link>
                     </li>
                     <li>
-                        <a><Link to="/admin/orders">Orders </Link></a>
+                         <Link to="/admin/orders">Orders </Link>
                     </li>
                 </ul>
     </aside>
