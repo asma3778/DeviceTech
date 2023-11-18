@@ -9,7 +9,7 @@ export const fetchProducts = createAsyncThunk("Products/fetchProducts", async ()
       if (!response) {
         throw new Error('Network response error');}
      
-      const Products = response;
+      const Products = response.data;
       return Products;
     } catch (error) {
     console.log(error) 
@@ -100,21 +100,21 @@ export const productSlice = createSlice({
       state.products = filteredItems
     }
   },
-  // extraReducers: (builder)=>{
-  //   builder
-  //   .addCase(fetchProducts.pending, (state) =>{
-  //     state.isLoading = true
-  //     state.error = null
-  //   })
-  //   .addCase(fetchProducts.fulfilled, (state, action: any) =>{
-  //     state.isLoading = false
-  //     state.products = action.payload
-  //   })
-  //   .addCase(fetchProducts.rejected, (state,action) =>{
-  //     state.isLoading = false
-  //     state.error = action.error.message || "Error"
-  //   })
-  // }
+    extraReducers: (builder)=>{
+    builder
+    .addCase(fetchProducts.pending, (state) =>{
+      state.isLoading = true
+      state.error = null
+    })
+    .addCase(fetchProducts.fulfilled, (state, action: any) =>{
+      state.isLoading = false
+      state.products = action.payload
+    })
+    .addCase(fetchProducts.rejected, (state,action) =>{
+      state.isLoading = false
+      state.error = action.error.message || "Error"
+    })
+  }
 })
 export const { 
   removeProduct, addProduct, productsRequest, 

@@ -1,24 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import api from '../../api'
-import { User } from '../../types/types'
-
-export type initialStateUser = {
-  users: User[]
-  error: null | string
-  isLoading: boolean
-  isLoggedIn: boolean
-  userData: User | null
-}
-
-const initialState: initialStateUser = {
-  users: [],
-  error: null,
-  isLoading: false, 
-  isLoggedIn: false,
-  userData: null
-}
-console.log(initialState)
+import { initialStateUser } from '../../types/types'
 
 export const fetchUser = createAsyncThunk("UserList/fetchUser", async () =>{ 
   try {
@@ -26,17 +9,26 @@ export const fetchUser = createAsyncThunk("UserList/fetchUser", async () =>{
 
       if (!response) {
         throw new Error('Network response error');}
-      return response;
+     
+      const Users = response.data;
+      return Users;
     } catch (error) {
     console.log(error) 
     }
   })
-  
 
   const data = localStorage.getItem("loginData") !== null ? JSON.parse(String(localStorage.getItem('loginData'))) : []
 
+  const initialState: initialStateUser = {
+    users: [],
+    error: null,
+    isLoading: false, 
+    isLoggedIn: data.isLoggedIn,
+    userData: data.userData
+  }
+
 export const userSlice = createSlice({
-  name: 'users',
+  name: 'User',
   initialState: initialState,
   reducers: {
     login : (state, action)=>{
@@ -92,22 +84,21 @@ export const userSlice = createSlice({
       state.users = filteredItems
     }
   },
-  // extraReducers: (builder)=>{
-  //   builder
-  //   .addCase(fetchUser.pending, (state) =>{
-  //     state.isLoading = true
-  //     state.error = null
-  //   })
-  //   .addCase(fetchUser.fulfilled, (state, action )=>{
-  //     state.isLoading = false
-  //     state.users = action.payload
-  //   })
-  //   .addCase(fetchUser.rejected, (state,action) =>{
-  //     state.isLoading = false
-  //     state.error = action.error.message || "Error"
-  //   })
-  // }
-  
+  extraReducers: (builder)=>{
+    builder
+    .addCase(fetchUser.pending, (state) =>{
+      state.isLoading = true
+      state.error = null
+    })
+    .addCase(fetchUser.fulfilled, (state, action )=>{
+      state.isLoading = false
+      state.users = action.payload
+    })
+    .addCase(fetchUser.rejected, (state,action) =>{
+      state.isLoading = false
+      state.error = action.error.message || "Error"
+    })
+  }
 })
 
 export const { login,logout, removeUser, addUser, usersRequest, usersSuccess, updateUser } = userSlice.actions

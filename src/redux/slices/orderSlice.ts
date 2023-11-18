@@ -16,7 +16,7 @@ export const fetchOrder = createAsyncThunk("UserOrders/fetchOrder", async () =>{
       if (!response) {
         throw new Error('Network response error');}
      
-      const Orders = response; 
+      const Orders = response.data; 
       return Orders;
     } catch (error) {
     console.log(error) 
@@ -43,21 +43,21 @@ export const orderSlice = createSlice({
       state.orders = filteredItems
     }
   },
-  // extraReducers: (builder)=>{
-  //   builder
-  //   .addCase(fetchOrder.pending, (state) =>{
-  //     state.isLoading = true
-  //     state.error = null
-  //   })
-  //   .addCase(fetchOrder.fulfilled, (state, action: any) =>{
-  //     state.isLoading = false
-  //     state.orders = action.payload
-  //   })
-  //   .addCase(fetchOrder.rejected, (state,action) =>{
-  //     state.isLoading = false
-  //     state.error = action.error.message || "Error"
-  //   })
-  // }
+  extraReducers: (builder)=>{
+    builder
+    .addCase(fetchOrder.pending, (state) =>{
+      state.isLoading = true
+      state.error = null
+    })
+    .addCase(fetchOrder.fulfilled, (state, action: any) =>{
+      state.isLoading = false
+      state.orders = action.payload
+    })
+    .addCase(fetchOrder.rejected, (state,action) =>{
+      state.isLoading = false
+      state.error = action.error.message || "Error"
+    })
+  }
 })
 
 export const { removeOrder, addOrder, ordersRequest, ordersSuccess } = orderSlice.actions
