@@ -82,7 +82,7 @@ export const UserProfile = () =>{
         </Container>
       </Box>
       {userData && (
-            <div key={userData.id}>
+            <div>
             <p>ID: {userData.id}</p>
             <p>Name: {`${userData.firstName}  ${userData.lastName}`}</p>
             <p>Email: {userData.email}</p>

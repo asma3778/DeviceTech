@@ -37,7 +37,7 @@ export const Category = () => {
     <div>
       <ManageCategory />
       {categories.map((category) => (
-        <div>
+        <div key={category.id}>
           {/* <h2>{category.id}</h2>
           <p>{category.name}</p> */}
           {/* <label htmlFor="category">{category.name}</label>

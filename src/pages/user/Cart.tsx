@@ -42,12 +42,11 @@ export const Cart = () => {
             <div className="product-in-cart">
               
               {cart.map(({ id, image, name, description, variants, price }) => (
-                <Card sx={{ maxWidth: 250 }}>
+                <Card sx={{ maxWidth: 250 }} key={id}>
                     <CardMedia
               sx={{ height: 200 }}
               image={image}
               title={name}
-              key={name}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">

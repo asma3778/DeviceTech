@@ -21,8 +21,6 @@ export const Home = () => {
         <h1>DeviceTech</h1>
         <h2>Our Products</h2>
         <p>you can find what you are looking for</p>
-
-        {products.isLoading && <h3> Loading products...</h3>}
         <div className="search-input-container">
         <input
           className="search-input"
@@ -33,6 +31,7 @@ export const Home = () => {
           onChange={hendleSearch}
         />
         <FilterProducts />
+        {products.isLoading && <h3> Loading products...</h3>}
         </div>
         </div>
         </div>

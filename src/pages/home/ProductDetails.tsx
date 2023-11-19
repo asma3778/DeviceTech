@@ -39,7 +39,7 @@ export const ProductDetails = () => {
 
     return(
       <div className="product-details-card">
-        <Card sx={{ maxWidth: 400 }} key={singleProduct.id}>
+        <Card sx={{ maxWidth: 400 }}>
       <CardMedia
         sx={{ height: 400 }}
         image={singleProduct.image}
