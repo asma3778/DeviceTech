@@ -72,7 +72,7 @@ export const productSlice = createSlice({
     },
     deletetAllCart: (state) => {
       state.cart = []
-      localStorage.removeItem('cart')
+      // localStorage.removeItem('cart')
     },
     productsRequest: (state) => {
       state.isLoading = true

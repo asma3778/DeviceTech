@@ -44,6 +44,7 @@ export const ProductDetails = () => {
         sx={{ height: 400 }}
         image={singleProduct.image}
         title={singleProduct.name}
+        component="img"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

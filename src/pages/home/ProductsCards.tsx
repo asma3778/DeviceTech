@@ -1,7 +1,7 @@
 import { useEffect, useState, ChangeEvent} from "react";
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
-import { Card, CardMedia, CardContent, Typography, CardActions, Button, Pagination } from "@mui/material";
+import { Card, CardMedia, CardContent, Typography, CardActions, Button, Pagination, Stack } from "@mui/material";
 
 import { AppDispatch, RootState } from "../../redux/store";
 import { addItemCart, productsRequest, productsSuccess } from "../../redux/slices/productSlice";
@@ -95,18 +95,19 @@ export const ProductsCards = () => {
               sx={{ height: 300 }}
               image={product.image}
               title={product.name}
+              key={product.image}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component="div" key={product.name}>
                 {product.name}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" key={product.description}>
                 {product.description}<br/>
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                 {product.variants}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" key={product.price}>
                 {product.price} $
               </Typography>
             </CardContent>
@@ -120,7 +121,7 @@ export const ProductsCards = () => {
           ))}
         </ul>
       </div>
-      <div className="pagenation">
+      {/* <div className="pagenation">
         <Button onClick={handlePrevPage} disabled={currentPage === 1}>
           Previous
         </Button>
@@ -128,7 +129,7 @@ export const ProductsCards = () => {
         <Button onClick={handleNextPage} disabled={currentPage === totalPages}>
           Next
         </Button>
-      </div>
+      </div> */}
         </>
     )
 };

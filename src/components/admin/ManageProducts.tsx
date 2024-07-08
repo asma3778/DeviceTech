@@ -58,7 +58,6 @@ export const ManageProducts = () => {
   const handleEditItem = (id: number) => {
     const editedItem = productsAdmin.products.find((product) => product.id == id)
     if (editedItem) {
-      console.log(editedItem)
       setproductForm({ ...editedItem, id: editedItem.id })
     }
   }

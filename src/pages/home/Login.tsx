@@ -34,7 +34,6 @@ export const Login = ()=>{
     const handleSubmit = async (event: FormEvent) =>{
         event.preventDefault()
         try {
-            console.log(user)
             const foundUser = users.find((userData) => userData.email === user.email)
             if (foundUser && foundUser.password === user.password){
                 dispatch(login(foundUser))
